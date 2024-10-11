@@ -1,3 +1,4 @@
+
 field_ = [['-' for _ in range(3)]for _ in range(3)]
 
 
@@ -13,7 +14,7 @@ def check_win (pf, plr):
             return True
 
     for i in range(3):
-        if pf[0][i] == plr and pf[1][i] == plr and pf[2][2] == plr:
+        if pf[0][i] == plr and pf[1][i] == plr and pf[2][i] == plr:
             return True
 
     if pf[0][0] == plr and pf[1][1] == plr and pf[2][2] == plr:
@@ -23,11 +24,32 @@ def check_win (pf, plr):
 
 current_player = 'X'
 
+
 while True:
     print_field(field_)
     print('Ход игрока: ', current_player)
-    st = int(input('Введите номер строки: ')) - 1
-    column = int(input('Введите номер столбца: ')) - 1
+    st = input('Введите номер строки: ')
+    column = input('Введите номер столбца: ')
+
+    if not st.isdigit():
+        print('Введите только цифру!')
+        continue
+
+    st = int(st) - 1
+
+    if st < 0 or st > 2:
+        print('Неправильное значение, введите цифру от 1 до 3')
+        continue
+
+    if not column.isdigit():
+        print('Введите только цифру!')
+        continue
+
+    column = int(column) - 1
+
+    if column < 0 or column > 2:
+        print('Неправильное значение, введите цифру от 1 до 3')
+        continue
 
     if field_[st][column] != '-':
         print('Ячейка занята!')
@@ -49,6 +71,8 @@ while True:
         current_player = 'O'
     else:
         current_player = 'X'
+
+
 
 
 #print_field(field_)
